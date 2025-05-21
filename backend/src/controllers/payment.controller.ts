@@ -14,7 +14,7 @@ export const initaitePaymentHandler = async(req: Request, res: Response): Promis
             return
         }
 
-        const paymentData = initaitePayment({email, amount, name});
+        const paymentData = await initaitePayment({email, amount, name});
         console.log(`Payment initialted for ${name}, amount: ${amount}`);
          res.status(200).json({
             status: "success",
