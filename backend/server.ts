@@ -1,1 +1,12 @@
-import Express from "express";
+import express from 'express';
+
+const app = express();
+app.use(express.json())
+
+
+
+app.listen(5000, ()=>{
+    console.log(`Running on port 5000`)
+})
+
+
