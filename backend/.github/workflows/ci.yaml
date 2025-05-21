@@ -1,0 +1,44 @@
+name: Backend CI
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'backend/**'
+  pull_request:
+    branches: [ main ]
+    paths:
+      - 'backend/**'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    env:
+      NODE_ENV: test
+      PAYSTACK_SECRET_KEY: ${{ secrets.PAYSTACK_SECRET_KEY_TEST }}
+      PAYSTACK_BASE_URL: https://api.paystack.co
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: 'node'
+        cache: 'npm'
+
+    - name: Install dependencies
+      working-directory: ./backend
+      run: npm ci
+
+    - name: Run linting
+      working-directory: ./backend
+      run: npm run lint
+
+    - name: Run tests
+      working-directory: ./backend
+      run: npm test
+
+    - name: Build
+      working-directory: ./backend
+      run: npm run build
