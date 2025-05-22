@@ -31,7 +31,7 @@ export const initaitePayment = async(paymentData: InitialPaymentRequests) => {
 
 export const verifyPayment = async (reference: string) => {
     try {
-        const response =await axios.get(
+        const response = await axios.get(
             `${config.paystack.baseURL}/transaction/verify/${reference}`,
         {
             headers: {
